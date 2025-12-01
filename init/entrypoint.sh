@@ -104,27 +104,33 @@ until php -r '
 done
 
 if [ ! -f "$CONFIG_DEST" ]; then
-  echo ">> No LocalSettings found; running MediaWiki installer ..."
-  php /var/www/html/maintenance/install.php \
-    --confpath /var/www/html \
-    --dbtype "$MW_DB_TYPE" \
-    --dbname "$MW_DB_NAME" \
-    --dbuser "$MW_DB_USER" \
-    --dbpass "$MW_DB_PASSWORD" \
-    --dbserver "$DB_SERVER" \
-    --server "$MW_SITE_SERVER" \
-    --scriptpath "" \
-    --lang en \
-    --pass "$MW_ADMIN_PASS" \
-    "$MW_SITENAME" \
-    "$MW_ADMIN_USER"
+  if [ -f "$CONFIG_SRC" ]; then
+    echo ">> LocalSettings.php exists in the container; copying to /data for persistence ..."
+    mkdir -p /data
+    cp "$CONFIG_SRC" "$CONFIG_DEST"
+  else
+    echo ">> No LocalSettings found; running MediaWiki installer ..."
+    php /var/www/html/maintenance/install.php \
+      --confpath /var/www/html \
+      --dbtype "$MW_DB_TYPE" \
+      --dbname "$MW_DB_NAME" \
+      --dbuser "$MW_DB_USER" \
+      --dbpass "$MW_DB_PASSWORD" \
+      --dbserver "$DB_SERVER" \
+      --server "$MW_SITE_SERVER" \
+      --scriptpath "" \
+      --lang en \
+      --pass "$MW_ADMIN_PASS" \
+      "$MW_SITENAME" \
+      "$MW_ADMIN_USER"
 
-  if ! grep -q "consciousness-theme.php" "$CONFIG_SRC"; then
-    echo 'require_once "$IP/localsettings.d/consciousness-theme.php";' >> "$CONFIG_SRC"
+    if ! grep -q "consciousness-theme.php" "$CONFIG_SRC"; then
+      echo 'require_once "$IP/localsettings.d/consciousness-theme.php";' >> "$CONFIG_SRC"
+    fi
+
+    mkdir -p /data
+    cp "$CONFIG_SRC" "$CONFIG_DEST"
   fi
-
-  mkdir -p /data
-  cp "$CONFIG_SRC" "$CONFIG_DEST"
 fi
 
 ln -sf "$CONFIG_DEST" "$CONFIG_SRC"
