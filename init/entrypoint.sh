@@ -64,6 +64,18 @@ if [ -z "${MW_SITE_SERVER:-}" ]; then
   fi
 fi
 
+if [ "${#MW_ADMIN_PASS}" -lt 10 ]; then
+  mkdir -p /data
+  if command -v openssl >/dev/null 2>&1; then
+    MW_ADMIN_PASS="$(openssl rand -base64 32 | tr -dc 'A-Za-z0-9' | head -c 24)"
+  else
+    MW_ADMIN_PASS="$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 24)"
+  fi
+  umask 077
+  echo "$MW_ADMIN_PASS" > /data/admin-password.txt
+  echo ">> MW_ADMIN_PASS was too short; generated a secure password and saved to /data/admin-password.txt"
+fi
+
 export PORT MW_DB_TYPE MW_SITENAME MW_ADMIN_USER MW_ADMIN_PASS MW_DB_NAME MW_DB_USER MW_DB_PASSWORD MW_DB_HOST MW_DB_PORT MW_SITE_SERVER
 echo ">> MW_SITE_SERVER set to ${MW_SITE_SERVER}"
 echo ">> Using DB host=${MW_DB_HOST} port=${MW_DB_PORT} name=${MW_DB_NAME} user=${MW_DB_USER}"
