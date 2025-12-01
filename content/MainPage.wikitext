@@ -7,9 +7,9 @@ __NOTOC__
     <h1>Compare how theories answer the core consciousness questions</h1>
     <p>Review the questions under discussion, see where each theory provides answers, and move into the comparison table to prepare notes or share with collaborators.</p>
     <div class="c-actions">
-      <a class="c-button c-button-primary" href="/wiki/Compare">Open comparison</a>
-      <a class="c-button" href="/wiki/Questions">Browse questions</a>
-      <a class="c-button" href="/wiki/Theories">Review theories</a>
+      <a class="c-button c-button-primary" href="/wiki/Compare">↗ Open comparison</a>
+      <a class="c-button" href="/wiki/Questions">☰ Browse questions</a>
+      <a class="c-button" href="/wiki/Theories">⇅ Review theories</a>
     </div>
     <p class="c-muted" style="margin-top: 12px;">Sign in to propose edits, add answers, or share the comparison view with colleagues.</p>
   </div>
@@ -20,26 +20,26 @@ __NOTOC__
       <a class="c-inline-link" href="/wiki/Questions">View all questions</a>
     </div>
     <div class="c-grid c-grid-2">
-      <div class="c-card">
-        <span class="c-badge category-foundations">Foundations</span>
-        <div class="c-card-title">What counts as a minimally conscious system?</div>
-        <div class="c-muted">Baseline criteria for consciousness across animals, artificial systems, or altered states.</div>
-      </div>
-      <div class="c-card">
-        <span class="c-badge category-mechanisms">Mechanisms</span>
-        <div class="c-card-title">How is subjective experience generated?</div>
-        <div class="c-muted">Key explanatory mechanisms proposed by leading theories.</div>
-      </div>
-      <div class="c-card">
-        <span class="c-badge category-scope">Scope</span>
-        <div class="c-card-title">Can non-biological systems be conscious?</div>
-        <div class="c-muted">Where theories draw the line on artificial or simulated minds.</div>
-      </div>
-      <div class="c-card">
+      <a class="c-card c-card-link" href="/wiki/Questions">
         <span class="c-badge category-criticisms">Criticisms</span>
-        <div class="c-card-title">What are the strongest objections?</div>
-        <div class="c-muted">Empirical gaps, philosophical challenges, and methodological critiques.</div>
-      </div>
+        <div class="c-card-title">Can this theory explain the unity of consciousness?</div>
+        <div class="c-meta">12 theories have answered</div>
+      </a>
+      <a class="c-card c-card-link" href="/wiki/Questions">
+        <span class="c-badge category-criticisms">Criticisms</span>
+        <div class="c-card-title">How does this theory respond to the knowledge argument (Mary's Room)?</div>
+        <div class="c-meta">12 theories have answered</div>
+      </a>
+      <a class="c-card c-card-link" href="/wiki/Questions">
+        <span class="c-badge category-criticisms">Criticisms</span>
+        <div class="c-card-title">What are the main criticisms of this theory?</div>
+        <div class="c-meta">12 theories have answered</div>
+      </a>
+      <a class="c-card c-card-link" href="/wiki/Questions">
+        <span class="c-badge category-foundations">Foundations</span>
+        <div class="c-card-title">Is consciousness an illusion?</div>
+        <div class="c-meta">12 theories have answered</div>
+      </a>
     </div>
   </div>
 
@@ -53,43 +53,43 @@ __NOTOC__
         <a class="c-inline-link" href="/wiki/Theories">View all theories</a>
       </div>
       <div class="c-grid c-grid-2">
-        <a class="c-card" href="/wiki/Theory/Integrated_Information_Theory">
+        <a class="c-card c-card-link" href="/wiki/Theory/Integrated_Information_Theory">
           <div class="c-card-row">
             <div class="c-dot" style="background:#2563eb;"></div>
             <div>
               <div class="c-card-title">Integrated Information Theory</div>
               <div class="c-muted">Experience arises from the integration of information (Φ).</div>
-              <div class="c-muted" style="margin-top:6px;font-size:12px;">42 answers</div>
+              <div class="c-meta" style="margin-top:6px;">42 answers</div>
             </div>
           </div>
         </a>
-        <a class="c-card" href="/wiki/Theory/Global_Workspace">
+        <a class="c-card c-card-link" href="/wiki/Theory/Global_Workspace">
           <div class="c-card-row">
             <div class="c-dot" style="background:#f59e0b;"></div>
             <div>
               <div class="c-card-title">Global Workspace Theory</div>
               <div class="c-muted">Consciousness as broadcast within a global workspace.</div>
-              <div class="c-muted" style="margin-top:6px;font-size:12px;">38 answers</div>
+              <div class="c-meta" style="margin-top:6px;">38 answers</div>
             </div>
           </div>
         </a>
-        <a class="c-card" href="/wiki/Theory/Higher_Order_Thought">
+        <a class="c-card c-card-link" href="/wiki/Theory/Higher_Order_Thought">
           <div class="c-card-row">
             <div class="c-dot" style="background:#10b981;"></div>
             <div>
               <div class="c-card-title">Higher-Order Thought</div>
               <div class="c-muted">Conscious states require higher-order representation.</div>
-              <div class="c-muted" style="margin-top:6px;font-size:12px;">24 answers</div>
+              <div class="c-meta" style="margin-top:6px;">24 answers</div>
             </div>
           </div>
         </a>
-        <a class="c-card" href="/wiki/Theory/Panpsychism">
+        <a class="c-card c-card-link" href="/wiki/Theory/Panpsychism">
           <div class="c-card-row">
             <div class="c-dot" style="background:#8b5cf6;"></div>
             <div>
               <div class="c-card-title">Panpsychism</div>
               <div class="c-muted">Consciousness as a fundamental feature of matter.</div>
-              <div class="c-muted" style="margin-top:6px;font-size:12px;">19 answers</div>
+              <div class="c-meta" style="margin-top:6px;">19 answers</div>
             </div>
           </div>
         </a>
