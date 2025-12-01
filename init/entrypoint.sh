@@ -8,29 +8,25 @@ CONFIG_DEST="/data/LocalSettings.php"
 
 # Allow Railway's MYSQL_URL connection string to populate individual fields.
 if [ -n "${MYSQL_URL:-}" ]; then
-  eval "$(python - <<'PY'
-import os
-from urllib.parse import urlparse
-
-url = os.environ.get("MYSQL_URL", "")
-parsed = urlparse(url)
-
-def emit(key, value):
-    if value:
-        print(f'export {key}="{value}"')
-
-emit("MYSQLUSER", parsed.username or "")
-emit("MYSQLPASSWORD", parsed.password or "")
-emit("MYSQLHOST", parsed.hostname or "")
-if parsed.port:
-    emit("MYSQLPORT", parsed.port)
-path = parsed.path[1:] if parsed.path.startswith("/") else parsed.path
-emit("MYSQLDATABASE", path)
-PY
-)"
+  eval "$(php -r '
+$url = getenv("MYSQL_URL");
+if (!$url) { exit; }
+$parts = parse_url($url);
+if (!$parts) { exit(1); }
+$map = [
+  "MYSQLUSER" => $parts["user"] ?? "",
+  "MYSQLPASSWORD" => $parts["pass"] ?? "",
+  "MYSQLHOST" => $parts["host"] ?? "",
+  "MYSQLPORT" => $parts["port"] ?? "",
+  "MYSQLDATABASE" => isset($parts["path"]) ? ltrim($parts["path"], "/") : "",
+];
+foreach ($map as $key => $value) {
+  if ($value !== "") {
+    printf("export %s=\"%s\"\n", $key, addcslashes($value, "\"\\\n"));
+  }
+}
+')" || true
 fi
-
-: "${PORT:=80}"
 : "${MW_DB_TYPE:=mysql}"
 : "${MW_SITENAME:=Consciousness Wiki}"
 : "${MW_ADMIN_USER:=admin}"
