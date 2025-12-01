@@ -18,6 +18,14 @@ This folder spins up a MediaWiki instance that mimics the look, color palette, a
    - persist `LocalSettings.php` to `mediawiki/data/LocalSettings.php` and symlink it in the container
 3) Visit http://localhost:8080 (login: `admin` / `adminpass` by default) and set the Main Page content using `mediawiki/content/MainPage.wikitext`.
 
+## Deploying to Railway
+- The repo now ships a `Dockerfile` that bakes in the theme and entrypoint; Railpack will pick this up automatically.
+- Add a MySQL service in Railway. The container will read `MYSQLHOST`, `MYSQLPORT`, `MYSQLUSER`, `MYSQLPASSWORD`, and `MYSQLDATABASE` automatically (or use `MW_DB_*` overrides).
+- Set env vars on the app service: choose `MW_ADMIN_USER` / `MW_ADMIN_PASS`, optionally `MW_SITENAME`, and set `MW_SITE_SERVER` to your Railway URL (e.g., `https://your-app.up.railway.app`). If Railway injects `RAILWAY_STATIC_URL` or `RAILWAY_PUBLIC_DOMAIN`, the entrypoint will use those when `MW_SITE_SERVER` is unset. `PORT` is set by Railway and the entrypoint rewrites Apache to listen on it.
+- Mount a Railway volume at `/data` (for `LocalSettings.php`) and another at `/var/www/html/images` for uploads. Without volumes, installs/uploads are wiped on redeploy.
+- Deploy. On first boot the entrypoint auto-installs MediaWiki, appends `localsettings.d/consciousness-theme.php`, and writes `LocalSettings.php` to `/data/LocalSettings.php`. Watch logs for `LocalSettings ready; starting Apache ...`.
+- After it comes up, log in with the admin credentials you set and paste `content/MainPage.wikitext` into the Main Page, then upload `Consciousness-map-preview.jpg` to restore the preview image.
+
 ### Notes on the install command
 - DB host is `database`, DB name/user/pass: `mediawiki` / `wikiuser` / `example`.
 - The installer sets the default skin to Vector 2022; the theme module is added by the line you append.
