@@ -133,7 +133,18 @@ if [ ! -f "$CONFIG_DEST" ]; then
   fi
 fi
 
+if [ -f "$CONFIG_DEST" ]; then
+  chmod 644 "$CONFIG_DEST"
+  # Keep a real file in the docroot in case symlinks are ignored.
+  cp "$CONFIG_DEST" "$CONFIG_SRC"
+else
+  echo "!! LocalSettings.php was not found in /data or the container; refusing to start without it."
+  exit 1
+fi
+
 ln -sf "$CONFIG_DEST" "$CONFIG_SRC"
+echo ">> LocalSettings paths:"
+ls -l "$CONFIG_DEST" "$CONFIG_SRC" || true
 
 echo ">> LocalSettings ready; starting Apache ..."
 exec "$@"
