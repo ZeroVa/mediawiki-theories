@@ -1,0 +1,40 @@
+services:
+  mediawiki:
+    image: mediawiki:1.42
+    restart: unless-stopped
+    depends_on:
+      - database
+    ports:
+      - "8080:80"
+    environment:
+      MW_DB_TYPE: mysql
+      MW_DB_HOST: database
+      MW_DB_NAME: mediawiki
+      MW_DB_USER: wikiuser
+      MW_DB_PASSWORD: example
+      MW_SITE_SERVER: http://localhost:8080
+      MW_SITENAME: Consciousness Wiki
+      MW_ADMIN_USER: admin
+      MW_ADMIN_PASS: adminpass
+    volumes:
+      - ./images:/var/www/html/images
+      - ./theme:/var/www/html/consciousness-theme
+      - ./localsettings.d:/var/www/html/localsettings.d
+      - ./data:/data
+      - ./init/entrypoint.sh:/entrypoint.sh:ro
+    entrypoint: ["/entrypoint.sh"]
+    command: ["apache2-foreground"]
+
+  database:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: wikiuser
+      MYSQL_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
