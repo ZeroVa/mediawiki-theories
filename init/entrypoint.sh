@@ -27,6 +27,12 @@ foreach ($map as $key => $value) {
 }
 ')" || true
 fi
+
+: "${MYSQLHOST:=}"
+: "${MYSQLPORT:=}"
+: "${MYSQLUSER:=}"
+: "${MYSQLPASSWORD:=}"
+: "${MYSQLDATABASE:=}"
 : "${MW_DB_TYPE:=mysql}"
 : "${MW_SITENAME:=Consciousness Wiki}"
 : "${MW_ADMIN_USER:=admin}"
@@ -60,6 +66,7 @@ fi
 
 export PORT MW_DB_TYPE MW_SITENAME MW_ADMIN_USER MW_ADMIN_PASS MW_DB_NAME MW_DB_USER MW_DB_PASSWORD MW_DB_HOST MW_DB_PORT MW_SITE_SERVER
 echo ">> MW_SITE_SERVER set to ${MW_SITE_SERVER}"
+echo ">> Using DB host=${MW_DB_HOST} port=${MW_DB_PORT} name=${MW_DB_NAME} user=${MW_DB_USER}"
 
 if [ "$PORT" != "80" ]; then
   cat > /etc/apache2/ports.conf <<EOF
