@@ -133,6 +133,17 @@ if [ ! -f "$CONFIG_DEST" ]; then
   fi
 fi
 
+ensure_theme_line() {
+  local file="$1"
+  if [ -f "$file" ] && ! grep -q 'consciousness-theme.php' "$file"; then
+    echo 'require_once "$IP/localsettings.d/consciousness-theme.php";' >> "$file"
+    echo ">> Added theme require to ${file}"
+  fi
+}
+
+ensure_theme_line "$CONFIG_DEST"
+ensure_theme_line "$CONFIG_SRC"
+
 if [ -f "$CONFIG_DEST" ]; then
   chmod 644 "$CONFIG_DEST"
   # Always place a real file in the docroot to avoid symlink resolution issues.
